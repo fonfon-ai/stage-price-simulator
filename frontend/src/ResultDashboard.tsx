@@ -155,15 +155,17 @@ export default function ResultDashboard({ result }: Props) {
         ))}
       </ul>
 
-      <ActualResultForm
-        runId={result.run_id}
-        defaultVenueName={result.balance_scenario.venue_name}
-        defaultCapacity={
-          result.balance_scenario.available_seats / result.balance_scenario.num_performances
-        }
-        defaultPrice={result.balance_scenario.price}
-        defaultNumPerformances={result.balance_scenario.num_performances}
-      />
+      {import.meta.env.VITE_HAS_BACKEND !== "false" && (
+        <ActualResultForm
+          runId={result.run_id}
+          defaultVenueName={result.balance_scenario.venue_name}
+          defaultCapacity={
+            result.balance_scenario.available_seats / result.balance_scenario.num_performances
+          }
+          defaultPrice={result.balance_scenario.price}
+          defaultNumPerformances={result.balance_scenario.num_performances}
+        />
+      )}
     </div>
   );
 }

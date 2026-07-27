@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ApiError, runSimulation } from "./api";
+import { runSimulationLocally } from "./calculation";
 import ResultDashboard from "./ResultDashboard";
 import StepCurrentProduction from "./steps/StepCurrentProduction";
 import StepGroup from "./steps/StepGroup";
@@ -108,7 +108,7 @@ export default function App() {
       setLoading(true);
       setError(null);
       try {
-        const response = await runSimulation({
+        const response = runSimulationLocally({
           group,
           past_performances: pastPerformances,
           current_production: currentProduction,
@@ -118,7 +118,7 @@ export default function App() {
         setResult(response);
         setStep(4);
       } catch (e) {
-        setError(e instanceof ApiError ? e.message : "予期しないエラーが発生しました。");
+        setError(e instanceof Error ? e.message : "予期しないエラーが発生しました。");
       } finally {
         setLoading(false);
       }
