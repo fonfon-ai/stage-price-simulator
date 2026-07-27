@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+*.db
+.env
+smoke_test.py
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/

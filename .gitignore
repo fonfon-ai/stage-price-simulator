@@ -1,0 +1,39 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# --- Secrets / env ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- SQLite dev DB ---
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Node / frontend ---
+node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+
+# --- E2E artifacts (screenshots, videos) ---
+e2e_shots/
+**/e2e_shots/
+playwright-report/
+test-results/
+
+# --- Leftover manual scratch scripts (superseded, kept out of history) ---
+/e2e_check.js
+backend/smoke_test.py
+
+# --- Misc caches / build output ---
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
