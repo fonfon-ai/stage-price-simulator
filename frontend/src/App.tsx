@@ -132,10 +132,7 @@ export default function App() {
   return (
     <div className="app-shell">
       <header className="app-header">
-        <h1>この公演、いくらで・どこで・何席売る？</h1>
-        <p className="app-subtitle">
-          演劇・コントの主催者が、価格・会場・公演回数のトレードオフを比較検討するための意思決定支援ツール
-        </p>
+        <h1>チケット価格シミュレーター</h1>
       </header>
 
       <ol className="step-indicator">
