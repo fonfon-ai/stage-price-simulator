@@ -229,8 +229,10 @@ def write_evaluation_report(
         "- モデル係数(rule_v0.1)は本比較のために一切変更していない。"
         "rule_v0.2はrule_v0.1のestimate_demand()を内部で再利用しており、n=1では両者は完全に一致する。"
     )
+    evaluated_org_count = len({v1_by_id[bid].organization_name for bid in evaluated_real_ids})
     lines.append(
-        "- サンプル数が非常に少ないため(実在団体2団体、評価済みtarget数件)、"
+        f"- サンプル数が非常に少ないため(実在団体{evaluated_org_count}団体、"
+        f"評価済みtarget数{len(evaluated_real_ids)}件)、"
         "本比較は「確定的な優劣判定」ではなく「観測された傾向」として扱うこと。"
     )
     lines.append("")

@@ -4,13 +4,13 @@ External Benchmark / Historical Backtest の結果報告。公開情報から収
 
 - **model_version**: `rule_v0.1`(固定・本フェーズ中は変更なし)
 - **使用団体数(実在データのみ)**: 4
-- **使用公演数(実在データ)**: 20
+- **使用公演数(実在データ)**: 21
 - **is_synthetic=true(架空・動作確認用)の行数**: 2(以下の統計からは除外)
 - **拒否された公演数(validation error)**: 0
 - **データ取得期間(run_start_dateの範囲、実在データ)**: 2018-08-01 〜 2026-05-26
-- **データ欠損率(主要な補助特徴量ベース、実在データ)**: 97.0%
-- **一次情報(confidence=A)比率(実在データ)**: 90.0%
-- **Backtest評価対象(実在データ)**: 5件 / **スキップ(実在データ)**: 11件
+- **データ欠損率(主要な補助特徴量ベース、実在データ)**: 96.8%
+- **一次情報(confidence=A)比率(実在データ)**: 90.5%
+- **Backtest評価対象(実在データ)**: 6件 / **スキップ(実在データ)**: 11件
 - **特殊条件(COVID等)により標準backtestから除外**: 4件
 
 ## Benchmark Unit Bug(履歴記録・恒久保存)
@@ -48,10 +48,10 @@ External Benchmark / Historical Backtest の結果報告。公開情報から収
 
 注意: `actual_ticket_price` は「最適価格の正解ラベル」ではなく、あくまで比較対象の実績値である。
 
-- price_gap(balanced_price - actual_price) 平均: 940円
-- price_gap 中央値: -300円
-- percentage_price_gap 平均: 11.8%
-- percentage_price_gap 中央値: -3.8%
+- price_gap(balanced_price - actual_price) 平均: 633円
+- price_gap 中央値: -400円
+- percentage_price_gap 平均: 6.8%
+- percentage_price_gap 中央値: -5.0%
 
 ## Sold-out Lower-bound Violation(実在データ)
 
@@ -67,7 +67,7 @@ External Benchmark / Historical Backtest の結果報告。公開情報から収
 
 ## Venue Fit の傾向(実売価格時点、実在データ)
 
-- too_large: 4件
+- too_large: 5件
 - slightly_large: 1件
 
 ## 団体別結果(実在データ)
@@ -76,6 +76,7 @@ External Benchmark / Historical Backtest の結果報告。公開情報から収
 |---|---:|---:|---:|
 | かが屋 | 1 | 0円 | 0.0% |
 | シソンヌ | 4 | 1175円 | 14.7% |
+| 劇団チョコレートケーキ | 1 | -900円 | -18.0% |
 
 ## 特殊条件(COVID等)により標準backtestから除外した公演
 
@@ -88,7 +89,8 @@ notesにCOVID等の特殊事情が記載されていても自動判定はせず�
 
 ## スキップされたケース(実在データ、データ不足で評価不能だったもの)
 
-- no_usable_history: 11件
+- no_usable_history: 10件
+- missing_target_venue_capacity: 1件
 
 内訳:
 - REAL-0001 (シソンヌ / シソンヌライブ[07]): no_usable_history
@@ -100,8 +102,8 @@ notesにCOVID等の特殊事情が記載されていても自動判定はせず�
 - REAL-0013 (かが屋 / かが屋の大カロ貝展): no_usable_history
 - REAL-0014 (かが屋 / かが屋の大カロ貝展2): no_usable_history
 - REAL-0018 (劇団チョコレートケーキ / ブラウン管より愛をこめてー宇宙人と異邦人ー): no_usable_history
-- REAL-0019 (劇団チョコレートケーキ / 白き山): no_usable_history
-- REAL-0020 (劇団チョコレートケーキ / ガマ): no_usable_history
+- P2-READY-GC-2023-MATSUMOTO (劇団チョコレートケーキ / 『ブラウン管より愛をこめて －宇宙人と異邦人－』松本公演): no_usable_history
+- REAL-0019 (劇団チョコレートケーキ / 白き山): missing_target_venue_capacity
 
 ## モデルが明らかに不自然だったケース(実在データ)
 
@@ -113,7 +115,7 @@ notesにCOVID等の特殊事情が記載されていても自動判定はせず�
 
 ## 主要な観察: 実在データがHistorical Backtestで評価不能になった理由
 
-実在データ20件中11件が `no_usable_history` (履歴として使える過去公演がゼロ)でスキップされた。原因は rule_v0.1 の係数ではなく、`model_adapter.py` の censored data 処理方針にある:
+実在データ21件中10件が `no_usable_history` (履歴として使える過去公演がゼロ)でスキップされた。原因は rule_v0.1 の係数ではなく、`model_adapter.py` の censored data 処理方針にある:
 
 - 過去公演をPastPerformanceとして使うには `tickets_sold` 相当の値が必要。これは (a) `observed_attendance` が既知、または (b) `sold_out_status=all_sold_out` かつ `venue_capacity` が既知、のいずれかでなければ導出できない(捏造しない方針のため)。
 - 今回のバッチでは `sold_out_status=unknown` かつ `observed_attendance` 未記入の行が多く、同一団体の過去公演がすべてこの状態だと、対象公演に使える履歴がゼロになりHistorical Backtestが実行できない。

@@ -21,6 +21,7 @@ rule_v0.1 と rule_v0.2 を同一の実在benchmark dataset(`benchmarks/data/pub
 | REAL-0007 | シソンヌ | 8000円 | 7500円 | 7500円 | -6.2% | -6.2% | 4312.4 | 5323.8 | 0.532 | 0.657 | True/True | too_large/slightly_large | False/False | 3 |
 | REAL-0008 | シソンヌ | 8000円 | 7700円 | 7700円 | -3.8% | -3.8% | 4631.2 | 5724.3 | 0.545 | 0.674 | True/True | too_large/slightly_large | False/False | 4 |
 | REAL-0015 | かが屋 | 4500円 | 4500円 | 4500円 | 0.0% | 0.0% | 2765.5 | 3301.8 | 0.657 | 0.785 | True/True | slightly_large/good | False/False | 1 |
+| REAL-0020 | 劇団チョコレートケーキ | 5000円 | 4100円 | 4000円 | -18.0% | -20.0% | 1105.9 | 1337.6 | N/A | N/A | None/None | too_large/slightly_large | False/False | 1 |
 
 ## 合成データ(is_synthetic=true)での比較 — 参考情報
 
@@ -33,7 +34,7 @@ rule_v0.1 と rule_v0.2 を同一の実在benchmark dataset(`benchmarks/data/pub
 
 | usable_history_count | 件数 | boundary_hit率 v0.1 | boundary_hit率 v0.2 | data_sufficiency | strong_recommendation_allowed |
 |---:|---:|---:|---:|---|---|
-| 1 | 2 | 50% | 50% | low | False |
+| 1 | 3 | 33% | 33% | low | False |
 | 2 | 1 | 0% | 0% | medium | True |
 | 3 | 1 | 0% | 0% | normal | True |
 | 4+ | 1 | 0% | 0% | normal | True |
@@ -45,11 +46,11 @@ rule_v0.1 と rule_v0.2 を同一の実在benchmark dataset(`benchmarks/data/pub
 | bucket | 件数 | coverage v0.1(平均) | coverage v0.2(平均) | violation率 v0.1 | violation率 v0.2 |
 |---|---:|---:|---:|---:|---:|
 | 5-8 | 1 | 0.657 | 0.785 | 100% | 100% |
-| 9-15 | 0 | N/A | N/A | N/A | N/A |
+| 9-15 | 1 | N/A | N/A | N/A | N/A |
 | 16-20 | 1 | 0.345 | 0.423 | 100% | 100% |
 | 21+ | 3 | 0.523 | 0.646 | 100% | 100% |
 
 ## データ品質に関する注意
 
 - モデル係数(rule_v0.1)は本比較のために一切変更していない。rule_v0.2はrule_v0.1のestimate_demand()を内部で再利用しており、n=1では両者は完全に一致する。
-- サンプル数が非常に少ないため(実在団体2団体、評価済みtarget数件)、本比較は「確定的な優劣判定」ではなく「観測された傾向」として扱うこと。
+- サンプル数が非常に少ないため(実在団体3団体、評価済みtarget数6件)、本比較は「確定的な優劣判定」ではなく「観測された傾向」として扱うこと。
