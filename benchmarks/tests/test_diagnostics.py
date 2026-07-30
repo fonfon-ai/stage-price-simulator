@@ -1,4 +1,5 @@
 import datetime as dt
+from typing import Any
 
 from benchmarks.schema.models import AttendanceType, BenchmarkPerformance, OrganizationType, SoldOutStatus
 from benchmarks.scripts.backtest import BacktestPair
@@ -12,8 +13,8 @@ from benchmarks.scripts.diagnostics import (
 from benchmarks.scripts.metrics import evaluate_pair
 
 
-def _perf(**overrides) -> BenchmarkPerformance:
-    defaults = dict(
+def _perf(**overrides: Any) -> BenchmarkPerformance:
+    defaults: dict[str, Any] = dict(
         benchmark_id="T-1",
         organization_name="団体",
         organization_type=OrganizationType.THEATRE,

@@ -1,0 +1,17 @@
+[tool.mypy]
+# リポジトリ全体(backend/app + benchmarks)をrootから一括で型チェックするための設定。
+# benchmarks/scripts, benchmarks/tests は `from app.calculation... import ...` で
+# Production側のロジック(backend/app/)をそのまま再利用している(コード重複を避けるため)。
+# 実行時はbenchmarks/scripts/_bootstrap.pyがbackendをsys.pathへ追加するが、これは
+# 静的解析であるmypyには効かない。mypy_pathでbackendを検索パスに加えることで、
+# import文やProductionコードを変更せずにこの解決エラーを直す。
+#
+# 使い方(リポジトリルートから):
+#   mypy backend/app benchmarks
+#
+# backend/app単体のみを`cd backend && mypy app`で実行する場合は、
+# backend/pyproject.toml の [tool.mypy] がそちらで使われる(本ファイルとは独立)。
+python_version = "3.11"
+mypy_path = "backend"
+ignore_missing_imports = true
+disallow_untyped_defs = false

@@ -1,11 +1,12 @@
 import datetime as dt
+from typing import Any
 
 from benchmarks.schema.models import AttendanceType, BenchmarkPerformance, OrganizationType, SoldOutStatus
 from benchmarks.schema.validation import has_errors, validate_case
 
 
-def _base_case(**overrides) -> BenchmarkPerformance:
-    defaults = dict(
+def _base_case(**overrides: Any) -> BenchmarkPerformance:
+    defaults: dict[str, Any] = dict(
         benchmark_id="T-1",
         organization_name="団体",
         organization_type=OrganizationType.THEATRE,

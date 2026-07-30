@@ -22,6 +22,7 @@ rule_v0.1 と rule_v0.2 を同一の実在benchmark dataset(`benchmarks/data/pub
 | REAL-0008 | シソンヌ | 8000円 | 7700円 | 7700円 | -3.8% | -3.8% | 4631.2 | 5724.3 | 0.545 | 0.674 | True/True | too_large/slightly_large | False/False | 4 |
 | REAL-0015 | かが屋 | 4500円 | 4500円 | 4500円 | 0.0% | 0.0% | 2765.5 | 3301.8 | 0.657 | 0.785 | True/True | slightly_large/good | False/False | 1 |
 | REAL-0020 | 劇団チョコレートケーキ | 5000円 | 4100円 | 4000円 | -18.0% | -20.0% | 1105.9 | 1337.6 | N/A | N/A | None/None | too_large/slightly_large | False/False | 1 |
+(注: `benchmark_results.csv` 全体のevaluated件数は7件だが、is_synthetic=true(架空データ、1件)は上表から意図的に除外している。詳細はdocs/PUBLIC_BENCHMARK_REPORT.mdの注意書きを参照。)
 
 ## 合成データ(is_synthetic=true)での比較 — 参考情報
 

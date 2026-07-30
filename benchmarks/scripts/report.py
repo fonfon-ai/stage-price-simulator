@@ -212,6 +212,15 @@ def build_report_markdown(
     lines.append(
         f"- **特殊条件(COVID等)により標準backtestから除外**: {len(special_condition_cases)}件"
     )
+    if evaluated_synthetic:
+        lines.append(
+            f"- **注意**: `run_backtest.py` のコンソール出力・`benchmark_results.csv` 全体で見た"
+            f"`evaluated` 件数は **{len(evaluated) + len(evaluated_synthetic)}件**"
+            f"(実在データ{len(evaluated)}件 + is_synthetic=true のデータ{len(evaluated_synthetic)}件)。"
+            "本レポートおよび `docs/RULE_V0_2_EVALUATION.md` の集計は一貫してis_synthetic=trueを"
+            "含めない実在データのみを使用しており、意図された差である"
+            "(架空データを実在団体の評価指標に混入させないため)。"
+        )
     lines.append("")
 
     lines.extend(_benchmark_unit_bug_history_section())

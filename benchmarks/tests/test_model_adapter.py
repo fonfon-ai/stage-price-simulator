@@ -1,11 +1,12 @@
 import datetime as dt
+from typing import Any
 
 from benchmarks.schema.models import AttendanceType, BenchmarkPerformance, OrganizationType, SoldOutStatus
 from benchmarks.scripts.model_adapter import build_past_performances, build_target_features
 
 
-def _perf(**overrides) -> BenchmarkPerformance:
-    defaults = dict(
+def _perf(**overrides: Any) -> BenchmarkPerformance:
+    defaults: dict[str, Any] = dict(
         benchmark_id="T-1",
         organization_name="団体",
         organization_type=OrganizationType.THEATRE,

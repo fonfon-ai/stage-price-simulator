@@ -12,6 +12,7 @@ External Benchmark / Historical Backtest の結果報告。公開情報から収
 - **一次情報(confidence=A)比率(実在データ)**: 90.5%
 - **Backtest評価対象(実在データ)**: 6件 / **スキップ(実在データ)**: 11件
 - **特殊条件(COVID等)により標準backtestから除外**: 4件
+- **注意**: `run_backtest.py` のコンソール出力・`benchmark_results.csv` 全体で見た`evaluated` 件数は **7件**(実在データ6件 + is_synthetic=true のデータ1件)。本レポートおよび `docs/RULE_V0_2_EVALUATION.md` の集計は一貫してis_synthetic=trueを含めない実在データのみを使用しており、意図された差である(架空データを実在団体の評価指標に混入させないため)。
 
 ## Benchmark Unit Bug(履歴記録・恒久保存)
 

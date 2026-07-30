@@ -1,4 +1,5 @@
 import datetime as dt
+from typing import Any
 
 from benchmarks.schema.models import AttendanceType, BenchmarkPerformance, OrganizationType, SoldOutStatus
 from benchmarks.scripts.backtest import BacktestPair
@@ -10,8 +11,8 @@ from app.calculation import constants as calc_constants  # noqa: E402
 from app.calculation.demand_estimator import RuleBasedDemandEstimator  # noqa: E402
 
 
-def _perf(**overrides) -> BenchmarkPerformance:
-    defaults = dict(
+def _perf(**overrides: Any) -> BenchmarkPerformance:
+    defaults: dict[str, Any] = dict(
         benchmark_id="T-1",
         organization_name="団体",
         organization_type=OrganizationType.THEATRE,

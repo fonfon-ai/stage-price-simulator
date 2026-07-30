@@ -66,6 +66,9 @@ backend/.venv/Scripts/python.exe -m benchmarks.scripts.compare_model_versions
   動作確認用の架空データであり、実在公演として扱ってはならない。
 - Claude(AI)自身が実在団体・実在公演のデータを推測して入力することはしない。
   収集はユーザー(人間)が公開情報から行うことを前提とする。
+- 投入時点のファイルそのもの(再現性・監査証跡用)は
+  [benchmarks/data/imports/](imports/README.md) に保存する。実行時にはこちらは
+  参照されない(常に `public_performances.csv` のみを読む)。
 
 ## Historical Backtest の time leakage 防止
 

@@ -131,6 +131,16 @@ def write_evaluation_report(
             )
     else:
         lines.append("評価済みの実在target数が0件のためN/A。")
+    evaluated_synthetic_count = sum(
+        1 for bid in synthetic_ids_present if v1_by_id[bid].status == "evaluated"
+    )
+    if evaluated_synthetic_count:
+        lines.append(
+            f"(注: `benchmark_results.csv` 全体のevaluated件数は"
+            f"{len(evaluated_real_ids) + evaluated_synthetic_count}件だが、"
+            f"is_synthetic=true(架空データ、{evaluated_synthetic_count}件)は上表から意図的に除外している。"
+            "詳細はdocs/PUBLIC_BENCHMARK_REPORT.mdの注意書きを参照。)"
+        )
     lines.append("")
 
     lines.append("## 合成データ(is_synthetic=true)での比較 — 参考情報")

@@ -209,6 +209,11 @@ backend/.venv/Scripts/python.exe -m benchmarks.scripts.run_backtest
 
 # benchmarks配下のテスト
 backend/.venv/Scripts/python.exe -m pytest benchmarks/tests -q
+
+# 型チェック(backend/app + benchmarksをリポジトリルートから一括実行)
+# ルートのpyproject.tomlでmypy_path=backendを設定しているため、
+# benchmarks/scripts, benchmarks/tests からの `app.calculation...` importも解決される。
+backend/.venv/Scripts/python.exe -m mypy backend/app benchmarks
 ```
 
 - 新しい実在公演データは [benchmarks/data/public_performances.csv](benchmarks/data/public_performances.csv)
